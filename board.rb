@@ -79,4 +79,9 @@ class Board
     self[pos1].color == self[pos2].color
   end
 
+  def dup
+    dup_board = Board.new
+    dup_board.grid.map! { |el| el.is_a?(Piece) ? el.dup(dup_board) : el }
+    dup_board
+  end
 end
