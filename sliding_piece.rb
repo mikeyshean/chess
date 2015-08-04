@@ -1,4 +1,4 @@
-relative_require "piece"
+require_relative "piece"
 class SlidingPiece < Piece
 
   def initialize(pos, board)

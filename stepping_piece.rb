@@ -1,4 +1,4 @@
-relative_require 'piece'
+require_relative 'piece'
 
 class SteppingPiece < Piece
 
@@ -8,5 +8,5 @@ class SteppingPiece < Piece
 
   def move_dirs
   end
-  
+
 end
