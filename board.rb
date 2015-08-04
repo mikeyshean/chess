@@ -5,11 +5,22 @@ require_relative 'king'
 require_relative 'knight'
 require_relative 'pawn'
 class Board
-
+  START = [Rook, Knight, Bishop, King, Queen, Bishop, Knight, Rook]
   attr_accessor :grid
 
   def initialize()
     @grid = Array.new(8) { Array.new(8) }
+    populate_grid
+  end
+
+  def populate_grid
+    grid.size.times do |idx|
+      black_pos, white_pos = [1, idx], [6, idx]
+      self[black_pos] = Pawn.new(black_pos, self, :black)
+      self[[0, idx]] = START[idx].new([0,idx], self, :black)
+      self[white_pos] = Pawn.new(white_pos, self, :white)
+      self[[grid.size-1, idx]] = START[idx].new([grid.size-1,idx], self, :white)
+    end
   end
 
   def [](pos)
