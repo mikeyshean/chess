@@ -8,5 +8,8 @@ class Bishop < SlidingPiece
     @color = color
   end
 
+  def move_dirs
+    DIRECTIONS
+  end
 
 end

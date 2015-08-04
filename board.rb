@@ -1,5 +1,5 @@
 require_relative 'bishop'
-
+require_relative 'rook'
 class Board
 
   attr_accessor :grid

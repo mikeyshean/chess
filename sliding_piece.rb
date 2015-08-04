@@ -7,7 +7,7 @@ class SlidingPiece < Piece
 
   def moves
     valid_moves = []
-    DIRECTIONS.each do |coord|
+    self.move_dirs.each do |coord|
       x,y = coord
       row,col = pos
       new_pos = [row + x, col + y]
