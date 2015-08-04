@@ -38,6 +38,18 @@ class Board
     end
   end
 
+  def in_check?(color)
+    king_pos = find_king(color)
+    opponents = grid.flatten.select { |el| el.is_a?(Piece) && el.color != color}
+    opponents.any? { |piece| piece.moves.include?(king_pos)}
+  end
+
+  def find_king(color)
+    king_pos = grid.flatten.select { |el| el.is_a?(King) && el.color == color }
+    king_pos[0].pos
+  end
+
+
   def [](pos)
     row, col = pos
     @grid[row][col]

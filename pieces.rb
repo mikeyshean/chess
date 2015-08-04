@@ -17,4 +17,5 @@ attr_reader :board, :pos, :color
   def other_color
     color == :white ? :black : :white
   end
+
 end
