@@ -18,4 +18,8 @@ class Board
     @grid[row][col] = value
   end
 
+  def on_board?(pos)
+    pos.all? { |coord| coord.between?(0,7) }
+  end
+
 end
