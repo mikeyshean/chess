@@ -8,5 +8,5 @@ attr_reader :board, :pos
   def moves
     self.move_dirs
   end
-
+  
 end

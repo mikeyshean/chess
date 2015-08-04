@@ -4,7 +4,7 @@ class Bishop < SlidingPiece
 
   DIRECTIONS = [[-1,1], [1,1], [-1,-1], [1,-1]]
   def initialize(pos, board, color)
-    super
+    super(pos,board)
     @color = color
   end
 
@@ -15,7 +15,7 @@ class Bishop < SlidingPiece
       row,col = pos
       new_pos = [row + x, col + y]
       until !board.on_board?(new_pos)
-        valid_moves << new_pos if not_obstructed
+        valid_moves << new_pos #if not_obstructed
         row += x
         col += y
         new_pos = [row + x, col + y]
