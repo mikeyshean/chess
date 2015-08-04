@@ -1,8 +1,8 @@
 class Pieces
 
-  def initialize(pos, color)
+  def initialize(pos, board)
     @pos = pos
-    @color = color
+    @board = board
   end
 
 end
