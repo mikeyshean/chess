@@ -4,6 +4,7 @@ require_relative 'queen'
 require_relative 'king'
 require_relative 'knight'
 require_relative 'pawn'
+require 'colorize'
 class Board
   START = [Rook, Knight, Bishop, King, Queen, Bishop, Knight, Rook]
   attr_accessor :grid
@@ -24,12 +25,15 @@ class Board
   end
 
   def render
+    color = :default
     puts "  #{("a".."h").to_a.join(" ")}"
     grid.size.times do |row|
       print "#{grid.size - row} "
       grid.size.times do |col|
-        print "#{self[[row,col]].nil? ? " " : self[[row,col]].to_s} "
+        print "#{self[[row,col]].nil? ? " " : self[[row,col]].to_s} ".colorize(:background => color)
+        color = (color == :default ? :white : :default )
       end
+      color = (color == :default ? :white : :default )
       puts
     end
   end
