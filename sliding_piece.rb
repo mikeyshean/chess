@@ -24,8 +24,4 @@ class SlidingPiece < Piece
     valid_moves
   end
 
-  def obstructed?(new_pos)
-    !board[new_pos].nil?
-  end
-
 end

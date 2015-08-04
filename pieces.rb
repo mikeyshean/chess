@@ -9,5 +9,9 @@ attr_reader :board, :pos, :color
   def moves
     self.move_dirs
   end
+  
+  def obstructed?(new_pos)
+    !board[new_pos].nil?
+  end
 
 end
