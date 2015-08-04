@@ -23,4 +23,8 @@ class Board
     pos.all? { |coord| coord.between?(0,7) }
   end
 
+  def same_color?(pos1, pos2)
+    self[pos1].color == self[pos2].color
+  end
+
 end
