@@ -5,8 +5,8 @@ class SlidingPiece < Piece
     super
   end
 
-  def moves()
-
+  def moves
+    move_dirs
   end
 
 end
