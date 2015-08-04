@@ -6,7 +6,7 @@ require_relative 'knight'
 require_relative 'pawn'
 require 'colorize'
 class Board
-  START = [Rook, Knight, Bishop, King, Queen, Bishop, Knight, Rook]
+  START = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
   attr_accessor :grid
 
   def initialize()
@@ -46,7 +46,8 @@ class Board
 
   def find_king(color)
     king_pos = grid.flatten.select { |el| el.is_a?(King) && el.color == color }
-    king_pos[0].pos
+    p king_pos[0].pos
+
   end
 
   def move(start, end_pos)
@@ -55,6 +56,7 @@ class Board
     if piece.moves.include?(end_pos)
       self[end_pos] = piece
       self[start] = nil
+      piece.assign_new_pos(end_pos)
     else
       raise ArgumentError.new("Invalid Move")
     end
@@ -74,14 +76,16 @@ class Board
   def on_board?(pos)
     pos.all? { |coord| coord.between?(0,7) }
   end
-
-  def same_color?(pos1, pos2)
-    self[pos1].color == self[pos2].color
-  end
+  #
+  # def same_color?(pos1, pos2)
+  #   self[pos1].color == self[pos2].color
+  # end
 
   def dup
     dup_board = Board.new
-    dup_board.grid.map! { |el| el.is_a?(Piece) ? el.dup(dup_board) : el }
+    dup_board.grid = self.grid.map do |row|
+      row.map { |el| el.is_a?(Piece) ? el.dup(dup_board) : el }
+    end
     dup_board
   end
 end

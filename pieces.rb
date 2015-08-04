@@ -1,5 +1,8 @@
+require 'byebug'
 class Piece
-attr_reader :board, :pos, :color
+attr_reader :board, :color
+attr_accessor :pos
+
   def initialize(pos, board, color)
     @pos = pos
     @board = board
@@ -20,12 +23,21 @@ attr_reader :board, :pos, :color
 
   def move_into_check?(end_pos)
     dboard = board.dup
-    dboard.move(self.pos, end_pos)
+    p "Duped Board: (Before)"
+    dboard.render
+    #debugger
+    dboard.move(pos, end_pos)
+    p "Duped Board: (After)"
+    dboard.render
     dboard.in_check?(self.color)
   end
 
   def dup(duped_board)
     self.class.new(pos.dup, duped_board, color)
+  end
+
+  def assign_new_pos(pos)
+    self.pos = pos
   end
 
 end
