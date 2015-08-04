@@ -22,7 +22,7 @@ class Board
       self[[grid.size-1, idx]] = START[idx].new([grid.size-1,idx], self, :white)
     end
   end
-
+  
   def [](pos)
     row, col = pos
     @grid[row][col]
