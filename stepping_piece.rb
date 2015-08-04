@@ -1,4 +1,4 @@
-require_relative 'piece'
+require_relative 'pieces'
 
 class SteppingPiece < Piece
 
@@ -12,10 +12,11 @@ class SteppingPiece < Piece
       x,y = coord
       row,col = pos
       new_pos = [row + x, col + y]
-      valid_moves << new_pos
+      valid_moves << new_pos if board.on_board?(new_pos)
     end
-    valid_moves
+    valid_moves.select do |move|
+      board[move].nil? ||
+        (obstructed?(move) && !board.same_color?(pos, move))
+    end
   end
-
-
 end

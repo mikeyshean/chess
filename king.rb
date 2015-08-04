@@ -1,5 +1,5 @@
 require_relative 'stepping_piece'
-class King
+class King < SteppingPiece
   DIRECTIONS = [
     [-1,  0],
     [ 1,  0],

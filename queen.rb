@@ -1,6 +1,6 @@
 require_relative "sliding_piece"
 
-class Queen
+class Queen < SlidingPiece
   DIRECTIONS = [
     [-1,  0],
     [ 1,  0],
