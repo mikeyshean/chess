@@ -13,4 +13,8 @@ class Rook < SlidingPiece
   def move_dirs
     DIRECTIONS
   end
+
+  def to_s
+    color == :white ? "\u2656" : "\u265C"
+  end
 end

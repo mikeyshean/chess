@@ -18,4 +18,8 @@ class Queen < SlidingPiece
   def move_dirs
     DIRECTIONS
   end
+
+  def to_s
+    color == :white ? "\u2655" : "\u265B"
+  end
 end

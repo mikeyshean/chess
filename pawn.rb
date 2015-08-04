@@ -20,11 +20,15 @@ class Pawn < Piece
       row, col = pos
       new_pos = [row + x, col + y]
 
-      if board.on_board?(new_pos) && obstructed?(new_pos) && !board.same_color?(pos, new_pos) 
+      if board.on_board?(new_pos) && obstructed?(new_pos) && !board.same_color?(pos, new_pos)
         valid_moves << new_pos
       end
     end
 
      valid_moves
+  end
+
+  def to_s
+    color == :white ? "\u2659" : "\u265F"
   end
 end

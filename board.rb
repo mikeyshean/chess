@@ -22,7 +22,18 @@ class Board
       self[[grid.size-1, idx]] = START[idx].new([grid.size-1,idx], self, :white)
     end
   end
-  
+
+  def render
+    puts "  #{("a".."h").to_a.join(" ")}"
+    grid.size.times do |row|
+      print "#{grid.size - row} "
+      grid.size.times do |col|
+        print "#{self[[row,col]].nil? ? " " : self[[row,col]].to_s} "
+      end
+      puts
+    end
+  end
+
   def [](pos)
     row, col = pos
     @grid[row][col]

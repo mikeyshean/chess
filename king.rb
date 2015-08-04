@@ -17,4 +17,8 @@ class King < SteppingPiece
   def move_dirs
     DIRECTIONS
   end
+
+  def to_s
+    color == :white ? "\u2654" : "\u265A"
+  end
 end
