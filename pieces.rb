@@ -18,8 +18,10 @@ attr_reader :board, :pos, :color
     color == :white ? :black : :white
   end
 
-  def move_into_check?(pos)
+  def move_into_check?(end_pos)
     dboard = board.dup
+    dboard.move(self.pos, end_pos)
+    dboard.in_check?(self.color)
   end
 
   def dup(duped_board)
