@@ -3,6 +3,7 @@ require_relative 'rook'
 require_relative 'queen'
 require_relative 'king'
 require_relative 'knight'
+require_relative 'pawn'
 class Board
 
   attr_accessor :grid
