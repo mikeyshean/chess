@@ -6,10 +6,8 @@ class Rook < SlidingPiece
     [ 0,  1],
     [ 0, -1]
   ]
-  attr_reader :color
   def initialize(pos, board, color)
-    super(pos, board)
-    @color = color
+    super
   end
 
   def move_dirs

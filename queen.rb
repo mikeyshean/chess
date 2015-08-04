@@ -13,7 +13,6 @@ class Queen
   ]
   def initialize(pos, board, color)
     super
-    @color = color
   end
 
   def move_dirs

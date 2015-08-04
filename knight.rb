@@ -11,8 +11,7 @@ class Knight < SteppingPiece
    [ 2,  1]
   ]
   def initialize(pos, board, color)
-    super(pos, board)
-    @color = color
+    super
   end
 
   def move_dirs

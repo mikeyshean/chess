@@ -2,7 +2,7 @@ require_relative 'piece'
 
 class SteppingPiece < Piece
 
-  def initialize(pos, board)
+  def initialize(pos, board, color)
     super
   end
 
