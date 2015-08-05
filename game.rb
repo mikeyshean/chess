@@ -43,11 +43,11 @@ private
       print "\n"
       puts e.message.colorize(:red)
       retry
-    rescue
+    rescue ChessError => e
       system("clear")
       board.render
       print "\n"
-      puts " Oops! Try again...".colorize(:red)
+      puts e.message.colorize(:red)
       retry
     ensure
       board.render

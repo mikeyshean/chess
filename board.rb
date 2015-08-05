@@ -4,6 +4,7 @@ require_relative 'queen'
 require_relative 'king'
 require_relative 'knight'
 require_relative 'pawn'
+require_relative 'chess_error'
 require 'colorize'
 
 class Board
@@ -41,12 +42,12 @@ class Board
 
   def move(start, end_pos)
     piece = self[start]
-    raise ArgumentError.new(" There is no piece there") if piece.nil?
+    raise ChessError.new(" There is no piece there") if piece.nil?
 
     if piece.valid_moves.include?(end_pos)
       move!(start, end_pos)
     else
-      raise ArgumentError.new(" Invalid Move")
+      raise ChessError.new(" Invalid Move")
     end
 
     self
