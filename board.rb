@@ -41,13 +41,13 @@ class Board
 
   def in_check?(color)
     king_pos = find_king(color)
-    opponents = grid.flatten.select { |el| el.is_a?(Piece) && el.color != color}
+    opponents = all_pieces(self[king_pos].other_color)
     opponents.any? { |piece| piece.moves.include?(king_pos)}
   end
 
   def find_king(color)
     king_pos = grid.flatten.select { |el| el.is_a?(King) && el.color == color }
-    p king_pos[0].pos
+    king_pos[0].pos
 
   end
 
@@ -104,7 +104,12 @@ class Board
   end
 
   def checkmate?(color)
-    pieces = grid.flatten.select { |el| el.is_a?(Piece) && el.color == color}
+    pieces = all_pieces(color)
     pieces.all? { |piece| piece.valid_moves.count == 0 }
+  end
+
+private
+  def all_pieces(color)
+    pieces = grid.flatten.select { |el| el.is_a?(Piece) && el.color == color}
   end
 end

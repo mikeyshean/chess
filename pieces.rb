@@ -23,12 +23,7 @@ attr_accessor :pos
 
   def move_into_check?(end_pos)
     dboard = board.dup
-    p "Duped Board: (Before)"
-    dboard.render
-    #debugger
     dboard.move!(pos, end_pos)
-    p "Duped Board: (After)"
-    dboard.render
     dboard.in_check?(self.color)
   end
 
