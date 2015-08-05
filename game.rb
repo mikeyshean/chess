@@ -24,21 +24,15 @@ class Game
   end
 
   def play_turn
-    new_pos = nil
-
     system("clear")
     board.render
-    if !end_pos.nil?
-      puts " #{players.last.to_s.capitalize} #{board[end_pos].class}"\
-       " to #{convert_back(*end_pos)}!".colorize(:green)
-    end
+    print_previous_play
 
     begin
       puts
       puts " #{current_player.to_s.capitalize}'s Turn:"
       puts
-      new_pos = board.move(*get_move)
-
+      board.move(*get_move)
     rescue ArgumentError => e
       system("clear")
       board.render
@@ -96,6 +90,13 @@ class Game
   def switch_player
     players.rotate!
     self.current_player = players.first
+  end
+
+  def print_previous_play
+    if !end_pos.nil?
+      puts " #{players.last.to_s.capitalize} #{board[end_pos].class}"\
+       " to #{convert_back(*end_pos)}!".colorize(:green)
+    end
   end
 
 end
