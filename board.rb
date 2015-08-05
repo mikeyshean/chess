@@ -34,7 +34,7 @@ class Board
   end
 
   def in_check?(color)
-    king_pos = find_king(color)
+    king_pos = find_king_pos(color)
     opponents = all_pieces(self[king_pos].other_color)
     opponents.any? { |piece| piece.moves.include?(king_pos)}
   end
@@ -114,9 +114,9 @@ private
     self[start] = nil
   end
 
-  def find_king(color)
-    king_pos = grid.flatten.select { |el| el.is_a?(King) && el.color == color }
-    king_pos[0].pos
+  def find_king_pos(color)
+    king = grid.flatten.find { |el| el.is_a?(King) && el.color == color }
+    king.pos
   end
 
   def populate_grid
