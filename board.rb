@@ -102,4 +102,9 @@ class Board
     end
     dup_board
   end
+
+  def checkmate?(color)
+    pieces = grid.flatten.select { |el| el.is_a?(Piece) && el.color == color}
+    pieces.all? { |piece| piece.valid_moves.count == 0 }
+  end
 end
