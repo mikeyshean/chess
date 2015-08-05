@@ -12,7 +12,6 @@ class Game
   def initialize
      @board = Board.new
      @players = [:white, :black]
-     @current_player = players.first
      @end_pos = nil
   end
 
@@ -100,7 +99,6 @@ private
 
   def switch_player
     players.rotate!
-    self.current_player = players.first
   end
 
   def print_previous_play
@@ -112,7 +110,11 @@ private
 
   def print_winner
     players.rotate!
-    puts "#{players.first.capitalize} wins!"
+    puts "#{current_player.capitalize} wins!"
+  end
+
+  def current_player
+    players.first
   end
 end
 
