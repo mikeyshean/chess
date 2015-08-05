@@ -93,7 +93,7 @@ class Board
 
   def checkmate?(color)
     pieces = all_pieces(color)
-    pieces.all? { |piece| piece.valid_moves.count == 0 }
+    pieces.all? { |piece| piece.valid_moves.empty? }
   end
 
 private
