@@ -26,9 +26,9 @@ class Pawn < Piece
 
   private
 
-  def gettable_piece?(pos)
-    board.on_board?(pos) && obstructed?(pos) && color != board[pos].color
-  end
+  # def gettable_piece?(pos)
+  #   board.on_board?(pos) && obstructed?(pos) && color != board[pos].color
+  # end
 
   def vertical_moves
     moves = []

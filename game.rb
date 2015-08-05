@@ -33,7 +33,7 @@ private
 
   def play_turn
     begin
-      puts
+      print "\n"
       puts " #{current_player.to_s.capitalize}'s Turn:"
       puts
       board.move(*get_move)

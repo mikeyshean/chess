@@ -12,7 +12,7 @@ class SlidingPiece < Piece
       until !board.on_board?(new_pos)
         break if blocked_by_own_piece(new_pos)
         valid_moves << new_pos
-        break if gettable_piece(new_pos)
+        break if gettable_piece?(new_pos)
         row += x
         col += y
         new_pos = [row + x, col + y]

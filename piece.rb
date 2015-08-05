@@ -41,8 +41,8 @@ attr_accessor :pos
 
   private
 
-  def gettable_piece(new_pos)
-    obstructed?(new_pos) && !board.same_color?(pos, new_pos)
+  def gettable_piece?(new_pos)
+    board.on_board?(pos) && obstructed?(new_pos) && !board.same_color?(pos, new_pos)
   end
 
 end

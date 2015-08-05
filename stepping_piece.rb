@@ -12,7 +12,7 @@ class SteppingPiece < Piece
       valid_moves << new_pos if board.on_board?(new_pos)
     end
 
-    valid_moves.select { |move| board[move].nil? || gettable_piece(move) }
+    valid_moves.select { |move| board[move].nil? || gettable_piece?(move) }
   end
 
 end
