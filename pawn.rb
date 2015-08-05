@@ -4,13 +4,13 @@ class Pawn < Piece
 
   DIRECTIONS = {
     :white => {
-      :vertical_delta =>  [-1, 0],
+      :vertical_delta =>  -1,
       :diagonal_delta => [[-1,-1], [-1,1]],
       :starting_row => 6
     },
 
     :black => {
-      :vertical_delta =>  [1, 0],
+      :vertical_delta =>  1,
       :diagonal_delta => [[1,-1],[1, 1]],
       :starting_row => 1
     }
@@ -30,7 +30,7 @@ class Pawn < Piece
     moves = []
     row, col = pos
 
-    x, _ = DIRECTIONS[color][:vertical_delta]
+    x = DIRECTIONS[color][:vertical_delta]
     new_pos = [row + x, col]
     moves << new_pos unless obstructed?(new_pos) || !board.on_board?(new_pos)
     moves
@@ -50,14 +50,13 @@ class Pawn < Piece
   def starting_moves
     moves = []
     row, col = pos
-    x, _ = DIRECTIONS[color][:vertical_delta]
+    x = DIRECTIONS[color][:vertical_delta]
 
     if row == DIRECTIONS[color][:starting_row]
-      one_step_pos, two_step_pos = [row + x, col], [row + x + x, col]
+      one_step_pos, two_step_pos = [row + x, col], [row + (2 * x), col]
 
-      if !obstructed?(one_step_pos)
-        moves << one_step_pos unless moves.include?(one_step_pos)
-        moves << two_step_pos if !obstructed?(two_step_pos)
+      if !obstructed?(one_step_pos) && !obstructed?(two_step_pos)
+        moves << two_step_pos
       end
     end
     moves
