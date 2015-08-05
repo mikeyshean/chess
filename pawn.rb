@@ -1,8 +1,8 @@
 require_relative 'pieces'
 class Pawn < Piece
   DIRECTIONS = {
-    :white => { :vertical => [-1,0], :diagonal => [[-1,-1], [-1,1]], :first_move_row => 6 },
-    :black => {:vertical => [1,0], :diagonal => [[1,-1],[1, 1]], :first_move_row => 1 }
+    :white => { :vertical_delta => [-1,0], :diagonal_delta => [[-1,-1], [-1,1]], :starting_row => 6 },
+    :black => {:vertical_delta => [1,0], :diagonal_delta => [[1,-1],[1, 1]], :starting_row => 1 }
   }
   attr_reader :start_move
   def initialize (pos, board, color)
@@ -10,39 +10,53 @@ class Pawn < Piece
   end
 
   def moves
-    valid_moves = []
-    x, _ = DIRECTIONS[color][:vertical]
-    row, col = pos
-    new_pos = [row + x, col]
-    valid_moves << new_pos unless obstructed?(new_pos) || !board.on_board?(new_pos)
-
-    if row == DIRECTIONS[color][:first_move_row]
-      new_pos1 = [row + x, col]
-      new_pos2 = [row + x + x, col]
-      if !obstructed?(new_pos1)
-        valid_moves << new_pos1 unless valid_moves.include?(new_pos1)
-        valid_moves << new_pos2 if !obstructed?(new_pos2)
-      end
-    end
-
-    DIRECTIONS[color][:diagonal].each do |coord|
-      (x,y) = coord
-      row, col = pos
-      new_pos = [row + x, col + y]
-
-      if board.on_board?(new_pos) && obstructed?(new_pos) && color != board[new_pos].color
-        valid_moves << new_pos
-      end
-    end
-
-     valid_moves
-  end
-
-  def first_move?
-
+    vertical_moves + starting_moves + diagonal_moves
   end
 
   def to_s
     color == :white ? "\u2659" : "\u265F"
+  end
+
+  private
+
+  def gettable_piece?(pos)
+    board.on_board?(pos) && obstructed?(pos) && color != board[pos].color
+  end
+
+  def vertical_moves
+    moves = []
+    row, col = pos
+
+    x, _ = DIRECTIONS[color][:vertical_delta]
+    new_pos = [row + x, col]
+    moves << new_pos unless obstructed?(new_pos) || !board.on_board?(new_pos)
+    moves
+  end
+
+  def diagonal_moves
+    moves = []
+    row, col = pos
+
+    DIRECTIONS[color][:diagonal_delta].each do |coord|
+      new_pos = [row + coord[0], col + coord[1]]
+      moves << new_pos if gettable_piece?(new_pos)
+    end
+    moves
+  end
+
+  def starting_moves
+    moves = []
+    row, col = pos
+    x, _ = DIRECTIONS[color][:vertical_delta]
+
+    if row == DIRECTIONS[color][:starting_row]
+      one_step_pos, two_step_pos = [row + x, col], [row + x + x, col]
+
+      if !obstructed?(one_step_pos)
+        moves << one_step_pos unless moves.include?(one_step_pos)
+        moves << two_step_pos if !obstructed?(two_step_pos)
+      end
+    end
+    moves
   end
 end

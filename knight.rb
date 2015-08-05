@@ -1,6 +1,6 @@
 require_relative 'stepping_piece'
 class Knight < SteppingPiece
-  DIRECTIONS =
+
   def initialize(pos, board, color)
     super
   end
