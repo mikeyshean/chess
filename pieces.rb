@@ -39,4 +39,8 @@ attr_accessor :pos
     moves.select { |move| !move_into_check?(move) }
   end
 
+  def gettable_piece(new_pos)
+    obstructed?(new_pos) && !board.same_color?(pos, new_pos)
+  end
+
 end

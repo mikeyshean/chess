@@ -16,7 +16,7 @@ class SteppingPiece < Piece
     end
     valid_moves.select do |move|
       board[move].nil? ||
-        (obstructed?(move) && board[pos].color != board[move].color )##!board.same_color?(pos, move))
+        gettable_piece(move)
     end
   end
 end
