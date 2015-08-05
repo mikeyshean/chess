@@ -5,6 +5,7 @@ require_relative 'king'
 require_relative 'knight'
 require_relative 'pawn'
 require 'colorize'
+
 class Board
   START = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
   attr_accessor :grid

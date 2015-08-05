@@ -1,13 +1,18 @@
 require_relative 'pieces'
+
 class Pawn < Piece
+
   DIRECTIONS = {
-    :white => { :vertical_delta => [-1,0], :diagonal_delta => [[-1,-1], [-1,1]], :starting_row => 6 },
-    :black => {:vertical_delta => [1,0], :diagonal_delta => [[1,-1],[1, 1]], :starting_row => 1 }
+    :white => {
+      :vertical_delta => [-1,0],
+      :diagonal_delta => [[-1,-1], [-1,1]],
+      :starting_row => 6
+    },
+
+    :black => {:vertical_delta => [1,0],
+               :diagonal_delta => [[1,-1],[1, 1]],
+               :starting_row => 1 }
   }
-  attr_reader :start_move
-  def initialize (pos, board, color)
-    super
-  end
 
   def moves
     vertical_moves + starting_moves + diagonal_moves

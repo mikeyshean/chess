@@ -1,10 +1,6 @@
 require_relative "pieces"
 class SlidingPiece < Piece
 
-  def initialize(pos, board, color)
-    super
-  end
-
   def moves
     valid_moves = []
     move_dirs.each do |coord|

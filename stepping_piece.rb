@@ -2,10 +2,6 @@ require_relative 'pieces'
 
 class SteppingPiece < Piece
 
-  def initialize(pos, board, color)
-    super
-  end
-
   def moves
     valid_moves = []
     move_dirs.each do |coord|
@@ -14,9 +10,10 @@ class SteppingPiece < Piece
       new_pos = [row + x, col + y]
       valid_moves << new_pos if board.on_board?(new_pos)
     end
+
     valid_moves.select do |move|
-      board[move].nil? ||
-        gettable_piece(move)
+      board[move].nil? || gettable_piece(move)
     end
   end
+
 end

@@ -1,4 +1,5 @@
 require 'byebug'
+
 class Piece
 attr_reader :board, :color
 attr_accessor :pos
@@ -40,7 +41,7 @@ attr_accessor :pos
   end
 
   private
-  
+
   def gettable_piece(new_pos)
     obstructed?(new_pos) && !board.same_color?(pos, new_pos)
   end

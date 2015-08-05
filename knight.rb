@@ -1,10 +1,6 @@
 require_relative 'stepping_piece'
 class Knight < SteppingPiece
 
-  def initialize(pos, board, color)
-    super
-  end
-
   def move_dirs
     [
      [-2, -1],

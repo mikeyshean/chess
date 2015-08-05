@@ -2,10 +2,6 @@ require_relative "sliding_piece"
 
 class Queen < SlidingPiece
 
-  def initialize(pos, board, color)
-    super
-  end
-
   def move_dirs
     [
       [-1,  0],
