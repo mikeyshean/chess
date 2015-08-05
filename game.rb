@@ -106,6 +106,9 @@ private
       puts " #{players.last.to_s.capitalize} #{board[end_pos].class}"\
        " to #{convert_back(*end_pos)}!".colorize(:green)
     end
+    if board.in_check?(current_player)
+      puts " #{current_player.capitalize} is in check!".colorize(:red)
+    end
   end
 
   def print_winner
