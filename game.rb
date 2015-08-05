@@ -24,6 +24,9 @@ class Game
       play_turn
       switch_player
     end
+    system("clear")
+    board.render
+    print_winner
   end
 
 private
@@ -99,6 +102,10 @@ private
     end
   end
 
+  def print_winner
+    players.rotate!
+    puts "#{players.first.capitalize} wins!"
+  end
 end
 
 
