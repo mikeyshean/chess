@@ -26,7 +26,7 @@ attr_accessor :pos
     p "Duped Board: (Before)"
     dboard.render
     #debugger
-    dboard.move(pos, end_pos)
+    dboard.move!(pos, end_pos)
     p "Duped Board: (After)"
     dboard.render
     dboard.in_check?(self.color)
@@ -38,6 +38,10 @@ attr_accessor :pos
 
   def assign_new_pos(pos)
     self.pos = pos
+  end
+
+  def valid_moves
+    moves.select { |move| !move_into_check?(move) }
   end
 
 end
