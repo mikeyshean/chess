@@ -12,7 +12,7 @@ class SlidingPiece < Piece
       row, col = pos
       new_pos = [row + x, col + y]
       until !board.on_board?(new_pos)
-        break if obstructed?(new_pos) && board.same_color?(pos, new_pos)
+        break if blocked_by_own_piece(new_pos)
         valid_moves << new_pos
         break if gettable_piece(new_pos)
         row += x
@@ -22,6 +22,12 @@ class SlidingPiece < Piece
 
     end
     valid_moves
+  end
+
+  private
+
+  def blocked_by_own_piece(new_pos)
+    obstructed?(new_pos) && board.same_color?(pos, new_pos)
   end
 
 end

@@ -14,16 +14,6 @@ class Board
     populate_grid
   end
 
-  def populate_grid
-    grid.size.times do |idx|
-      black_pos, white_pos = [1, idx], [6, idx]
-      self[black_pos] = Pawn.new(black_pos, self, :black)
-      self[[0, idx]] = START[idx].new([0,idx], self, :black)
-      self[white_pos] = Pawn.new(white_pos, self, :white)
-      self[[grid.size-1, idx]] = START[idx].new([grid.size-1,idx], self, :white)
-    end
-  end
-
   def render
     color = :default
 
@@ -43,12 +33,6 @@ class Board
     king_pos = find_king(color)
     opponents = all_pieces(self[king_pos].other_color)
     opponents.any? { |piece| piece.moves.include?(king_pos)}
-  end
-
-  def find_king(color)
-    king_pos = grid.flatten.select { |el| el.is_a?(King) && el.color == color }
-    king_pos[0].pos
-
   end
 
   def move(start, end_pos)
@@ -107,6 +91,7 @@ class Board
   end
 
 private
+
   def all_pieces(color)
     pieces = grid.flatten.select { |el| el.is_a?(Piece) && el.color == color}
   end
@@ -120,6 +105,22 @@ private
     self[end_pos] = piece
     self[start] = nil
   end
+
+  def find_king(color)
+    king_pos = grid.flatten.select { |el| el.is_a?(King) && el.color == color }
+    king_pos[0].pos
+  end
+
+  def populate_grid
+    grid.size.times do |idx|
+      black_pos, white_pos = [1, idx], [6, idx]
+      self[black_pos] = Pawn.new(black_pos, self, :black)
+      self[[0, idx]] = START[idx].new([0,idx], self, :black)
+      self[white_pos] = Pawn.new(white_pos, self, :white)
+      self[[grid.size-1, idx]] = START[idx].new([grid.size-1,idx], self, :white)
+    end
+  end
+
 end
 
 
