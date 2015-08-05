@@ -55,8 +55,7 @@ class Board
     piece = self[start]
     raise ArgumentError.new("There is no piece there")  if piece.nil?
     if piece.valid_moves.include?(end_pos)
-      self[end_pos] = piece
-      self[start] = nil
+      update_board(start, end_pos)
       piece.assign_new_pos(end_pos)
     else
       raise ArgumentError.new("Invalid Move")
@@ -68,8 +67,7 @@ class Board
     piece = self[start]
     raise ArgumentError.new("There is no piece there")  if piece.nil?
     if piece.moves.include?(end_pos)
-      self[end_pos] = piece
-      self[start] = nil
+      update_board(start, end_pos)
       piece.assign_new_pos(end_pos)
     else
       raise ArgumentError.new("Invalid Move")
@@ -90,10 +88,10 @@ class Board
   def on_board?(pos)
     pos.all? { |coord| coord.between?(0,7) }
   end
-  #
-  # def same_color?(pos1, pos2)
-  #   self[pos1].color == self[pos2].color
-  # end
+
+  def same_color?(pos1, pos2)
+    self[pos1].color == self[pos2].color
+  end
 
   def dup
     dup_board = Board.new
@@ -115,6 +113,12 @@ private
 
   def switch_board_color(color)
     color == :default ? :white : :default
+  end
+
+  def update_board(start, end_pos)
+    piece = self[start]
+    self[end_pos] = piece
+    self[start] = nil
   end
 end
 
