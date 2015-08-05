@@ -31,10 +31,6 @@ attr_accessor :pos
     self.class.new(pos.dup, duped_board, color)
   end
 
-  def assign_new_pos(pos)
-    self.pos = pos
-  end
-
   def valid_moves
     moves.select { |move| !move_into_check?(move) }
   end

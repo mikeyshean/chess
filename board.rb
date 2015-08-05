@@ -60,7 +60,7 @@ class Board
   def move!(start, end_pos)
     piece = self[start]
     update_board(start, end_pos)
-    piece.assign_new_pos(end_pos)
+    piece.pos = end_pos #piece.assign_new_pos(end_pos)
 
     self
   end
