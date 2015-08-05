@@ -18,16 +18,15 @@ class Game
 
   def play
     until over?
+      system("clear")
+      board.render
+      print_previous_play
       play_turn
       switch_player
     end
   end
 
   def play_turn
-    system("clear")
-    board.render
-    print_previous_play
-
     begin
       puts
       puts " #{current_player.to_s.capitalize}'s Turn:"

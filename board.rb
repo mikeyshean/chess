@@ -123,17 +123,3 @@ private
   end
 
 end
-
-
-
-if __FILE__ == $PROGRAM_NAME
-  b = Board.new
-  b.move([6,5], [5,5])
-  b.move([1,4], [3,4])
-  b.move([6,6], [4,6])
-  b.move([0,3], [4,7])
-  b.render
-  puts "White Checkmate? #{b.checkmate?(:white)}"
-  puts "Black Checkmate? #{b.checkmate?(:black)}"
-
-end
