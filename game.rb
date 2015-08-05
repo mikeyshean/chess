@@ -8,6 +8,7 @@ class Game
 
   BOARD_SIZE = 8
   ORD_DELTA = 97
+  INPUT_PATTERN = /^[a-h]{1}[1-8]{1}\,[a-h]{1}[1-8]{1}$/
 
   def initialize
      @board = Board.new
@@ -36,7 +37,8 @@ private
       print "\n"
       puts " #{current_player.to_s.capitalize}'s Turn:"
       print "\n"
-      board.move(*get_move)
+      move = get_move
+      board.move(*convert(move)) if valid_move?(move)
     rescue ArgumentError => e
       system("clear")
       board.render
@@ -57,27 +59,34 @@ private
   def get_move
     result = []
     print " Input start piece and end position (ex:'f2,f3'): "
-    input = gets.chomp.split(",")
+    input = gets.chomp
+  end
 
+  def valid_move?(input)
+    raise ArgumentError.new("Oops! Try again...") if
+      INPUT_PATTERN.match(input).nil?
+    raise ChessError.new(" There's no piece there!") if
+      board[convert(input).first].nil?
+    raise ChessError.new(" Not your piece!") if
+      board[convert(input).first].color != current_player
+
+    true
+  end
+
+  def convert(input)
+    result = []
+    input = input.split(",")
     input.each do |coord|
       col, row = coord.split("")
       row = Integer(row)
       col = String(col).downcase
 
-      raise ArgumentError.new(" Invalid position!") if !("a".."h").to_a.include?(col)
-      raise ArgumentError.new(" Invalid position!") if !row.between?(1,8)
-      result << convert(row, col)
+      new_row = BOARD_SIZE - row
+      new_col = col.ord - ORD_DELTA
+      result << [new_row, new_col]
     end
-    raise ArgumentError.new(" There's no piece there!") if board[result.first].nil?
-    raise ArgumentError.new(" Not your piece!") if board[result.first].color != current_player
     self.end_pos = result[1]
     result
-  end
-
-  def convert(row, col)
-    new_row = BOARD_SIZE - row
-    new_col = col.ord - ORD_DELTA
-    [new_row, new_col]
   end
 
   def convert_back(row, col)
