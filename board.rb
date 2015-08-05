@@ -27,7 +27,7 @@ class Board
       end
 
       color = switch_board_color(color)
-      puts
+      print "\n"
     end
 
     puts "   #{("a".."h").to_a.join("  ")}"
