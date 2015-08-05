@@ -38,24 +38,24 @@ class Board
 
   def move(start, end_pos)
     piece = self[start]
-    raise ArgumentError.new("There is no piece there")  if piece.nil?
+    raise ArgumentError.new(" There is no piece there") if piece.nil?
     if piece.valid_moves.include?(end_pos)
       update_board(start, end_pos)
       piece.assign_new_pos(end_pos)
     else
-      raise ArgumentError.new("Invalid Move")
+      raise ArgumentError.new(" Invalid Move")
     end
-    self
+    end_pos
   end
 
   def move!(start, end_pos)
     piece = self[start]
-    raise ArgumentError.new("There is no piece there")  if piece.nil?
+    raise ArgumentError.new(" There is no piece there") if piece.nil?
     if piece.moves.include?(end_pos)
       update_board(start, end_pos)
       piece.assign_new_pos(end_pos)
     else
-      raise ArgumentError.new("Invalid Move")
+      raise ArgumentError.new(" Invalid Move")
     end
     self
   end
