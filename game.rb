@@ -35,18 +35,18 @@ private
     begin
       print "\n"
       puts " #{current_player.to_s.capitalize}'s Turn:"
-      puts
+      print "\n"
       board.move(*get_move)
     rescue ArgumentError => e
       system("clear")
       board.render
-      puts
+      print "\n"
       puts e.message.colorize(:red)
       retry
     rescue
       system("clear")
       board.render
-      puts
+      print "\n"
       puts " Oops! Try again...".colorize(:red)
       retry
     ensure
