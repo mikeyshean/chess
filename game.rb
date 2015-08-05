@@ -6,7 +6,6 @@ class Game
   attr_reader :board, :players
   attr_accessor :current_player, :end_pos
 
-  BOARD_SIZE = 8
   ORD_DELTA = 97
   INPUT_PATTERN = /^[a-h]{1}[1-8]{1}\,[a-h]{1}[1-8]{1}$/
 
@@ -81,7 +80,7 @@ private
       row = Integer(row)
       col = String(col).downcase
 
-      new_row = BOARD_SIZE - row
+      new_row = board.size - row
       new_col = col.ord - ORD_DELTA
       result << [new_row, new_col]
     end
@@ -90,7 +89,7 @@ private
   end
 
   def convert_back(row, col)
-    new_row = BOARD_SIZE - ((BOARD_SIZE + row) % 8)
+    new_row = board.size - ((board.size + row) % 8)
     new_col = (col + ORD_DELTA).chr
     "#{new_col}#{new_row}"
   end

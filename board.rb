@@ -9,20 +9,24 @@ require 'colorize'
 
 class Board
   START = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
+  BOARD_SIZE = 8
+
+  attr_reader :size
   attr_accessor :grid
 
   def initialize()
-    @grid = Array.new(8) { Array.new(8) }
+    @grid = Array.new(BOARD_SIZE) { Array.new(BOARD_SIZE) }
+    @size = BOARD_SIZE
     populate_grid
   end
 
   def render
     color = :default
 
-    grid.size.times do |row|
-      print "#{grid.size - row} "
+    BOARD_SIZE.times do |row|
+      print "#{BOARD_SIZE - row} "
 
-      grid.size.times do |col|
+      BOARD_SIZE.times do |col|
         print " #{self[[row,col]].nil? ? " " : self[[row,col]].to_s} ".colorize(:background => color)
         color = switch_board_color(color)
       end
@@ -114,12 +118,12 @@ private
   end
 
   def populate_grid
-    grid.size.times do |idx|
+    BOARD_SIZE.times do |idx|
       black_pos, white_pos = [1, idx], [6, idx]
       self[black_pos] = Pawn.new(black_pos, self, :black)
       self[[0, idx]] = START[idx].new([0,idx], self, :black)
       self[white_pos] = Pawn.new(white_pos, self, :white)
-      self[[grid.size-1, idx]] = START[idx].new([grid.size-1,idx], self, :white)
+      self[[BOARD_SIZE-1, idx]] = START[idx].new([BOARD_SIZE-1,idx], self, :white)
     end
   end
 
