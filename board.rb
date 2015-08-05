@@ -31,9 +31,9 @@ class Board
       print "#{grid.size - row} "
       grid.size.times do |col|
         print " #{self[[row,col]].nil? ? " " : self[[row,col]].to_s} ".colorize(:background => color)
-        color = (color == :default ? :white : :default )
+        color = switch_board_color(color)
       end
-      color = (color == :default ? :white : :default )
+      color = switch_board_color(color)
       puts
     end
     puts "   #{("a".."h").to_a.join("  ")}"
@@ -112,4 +112,22 @@ private
   def all_pieces(color)
     pieces = grid.flatten.select { |el| el.is_a?(Piece) && el.color == color}
   end
+
+  def switch_board_color(color)
+    color == :default ? :white : :default
+  end
+end
+
+
+
+if __FILE__ == $PROGRAM_NAME
+  b = Board.new
+  b.move([6,5], [5,5])
+  b.move([1,4], [3,4])
+  b.move([6,6], [4,6])
+  b.move([0,3], [4,7])
+  b.render
+  puts "White Checkmate? #{b.checkmate?(:white)}"
+  puts "Black Checkmate? #{b.checkmate?(:black)}"
+
 end
