@@ -11,7 +11,7 @@ attr_accessor :pos
   end
 
   def moves
-    self.move_dirs
+    raise NotImplementedError
   end
 
   def obstructed?(new_pos)
