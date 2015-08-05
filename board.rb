@@ -20,13 +20,16 @@ class Board
 
     grid.size.times do |row|
       print "#{grid.size - row} "
+
       grid.size.times do |col|
         print " #{self[[row,col]].nil? ? " " : self[[row,col]].to_s} ".colorize(:background => color)
         color = switch_board_color(color)
       end
+
       color = switch_board_color(color)
       puts
     end
+
     puts "   #{("a".."h").to_a.join("  ")}"
   end
 
@@ -39,24 +42,28 @@ class Board
   def move(start, end_pos)
     piece = self[start]
     raise ArgumentError.new(" There is no piece there") if piece.nil?
+
     if piece.valid_moves.include?(end_pos)
       update_board(start, end_pos)
       piece.assign_new_pos(end_pos)
     else
       raise ArgumentError.new(" Invalid Move")
     end
-    end_pos
+
+    self
   end
 
   def move!(start, end_pos)
     piece = self[start]
     raise ArgumentError.new(" There is no piece there") if piece.nil?
+
     if piece.moves.include?(end_pos)
       update_board(start, end_pos)
       piece.assign_new_pos(end_pos)
     else
       raise ArgumentError.new(" Invalid Move")
     end
+
     self
   end
 

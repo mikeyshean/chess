@@ -26,6 +26,8 @@ class Game
     end
   end
 
+private
+
   def play_turn
     begin
       puts
@@ -80,7 +82,6 @@ class Game
     new_col = (col + ORD_DELTA).chr
     "#{new_col}#{new_row}"
   end
-
 
   def over?
     board.checkmate?(:white) || board.checkmate?(:black)

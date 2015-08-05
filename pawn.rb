@@ -4,14 +4,16 @@ class Pawn < Piece
 
   DIRECTIONS = {
     :white => {
-      :vertical_delta => [-1,0],
+      :vertical_delta =>  [-1, 0],
       :diagonal_delta => [[-1,-1], [-1,1]],
       :starting_row => 6
     },
 
-    :black => {:vertical_delta => [1,0],
-               :diagonal_delta => [[1,-1],[1, 1]],
-               :starting_row => 1 }
+    :black => {
+      :vertical_delta =>  [1, 0],
+      :diagonal_delta => [[1,-1],[1, 1]],
+      :starting_row => 1
+    }
   }
 
   def moves
