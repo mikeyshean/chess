@@ -8,7 +8,7 @@ require_relative 'chess_error'
 require 'colorize'
 
 class Board
-  START = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
+  BACK_ROW_PIECES = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
   BOARD_SIZE = 8
 
   attr_reader :size
@@ -88,6 +88,7 @@ class Board
     dup_board.grid = self.grid.map do |row|
       row.map { |el| el.is_a?(Piece) ? el.dup(dup_board) : el }
     end
+    
     dup_board
   end
 
@@ -121,9 +122,9 @@ private
     BOARD_SIZE.times do |idx|
       black_pos, white_pos = [1, idx], [6, idx]
       self[black_pos] = Pawn.new(black_pos, self, :black)
-      self[[0, idx]] = START[idx].new([0,idx], self, :black)
+      self[[0, idx]] = BACK_ROW_PIECES[idx].new([0,idx], self, :black)
       self[white_pos] = Pawn.new(white_pos, self, :white)
-      self[[BOARD_SIZE-1, idx]] = START[idx].new([BOARD_SIZE-1,idx], self, :white)
+      self[[BOARD_SIZE-1, idx]] = BACK_ROW_PIECES[idx].new([BOARD_SIZE-1,idx], self, :white)
     end
   end
 
