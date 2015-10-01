@@ -1,9 +1,9 @@
-require_relative 'bishop'
-require_relative 'rook'
-require_relative 'queen'
-require_relative 'king'
-require_relative 'knight'
-require_relative 'pawn'
+require_relative 'pieces/bishop'
+require_relative 'pieces/rook'
+require_relative 'pieces/queen'
+require_relative 'pieces/king'
+require_relative 'pieces/knight'
+require_relative 'pieces/pawn'
 require_relative 'chess_error'
 require 'colorize'
 
@@ -88,7 +88,7 @@ class Board
     dup_board.grid = self.grid.map do |row|
       row.map { |el| el.is_a?(Piece) ? el.dup(dup_board) : el }
     end
-    
+
     dup_board
   end
 
